@@ -1,0 +1,80 @@
+@startuml
+class GameEngine {
+    - static LaunchBallForceScale: Double
+    - static MaxLaunchBallForceMagnitude: Double
+    + GameEngine(board: BoardModel, gameBoundaryDelegate: GameBoundaryDelegate)
+    + snapshot(): GameState
+    + launchBall(from: Position, to: Position, deltaTime: Double): GameState
+    + refresh(deltaTime: Double): GameState
+    - handleMoves(deltaTime: Double)
+    - handleCollisionsWithBall(deltaTime: Double)
+    - updatePeg(oldPeg: PegModelable, updatedPeg: PegModelable)
+    - removeCollidedPegs()
+    - isBallOutOfBounds(ball: Ball): Bool
+    - calculateLaunchForce(from: Position, to: Position): Force
+}
+
+class GameState {
+}
+
+class Ball {
+    - static Mass: Double
+    - static Radius: Double
+    - static PastVelocitiesCount: Int
+    - static MinimumVelocityMagnitude: Double
+    + freeBody: FreeBody
+    - previousVelocities: [Velocity]
+    + radius: Double
+    + center: Position
+    + isStuck(): Bool
+    + willCollide(with: PegModelable): Bool
+    + move(externalForces: [Force], deltaTime: Double): Ball
+    + onCollision(with: PegModelable, deltaTime: Double): Ball
+    + onCollision(with: Boundary, deltaTime: Double): Ball
+}
+
+class Boundary {
+    + width: Double
+    + height: Double
+    + restitutionCoefficient: Double
+    + isBallOutOfBounds(ball: Ball): Bool
+}
+
+interface GameBoundaryDelegate {
+    + getBoundary(): Boundary
+}
+
+interface PegModelable {
+    + id: UUID
+    + boardId: UUID?
+    + radius: Double
+    + center: Position
+    + restitutionCoefficient: Double
+    + willCollide(with: PegModelable): Bool
+    + addToBoard(board: BoardModel): BoardModel
+    + removeFromBoard(board: BoardModel): BoardModel
+    + moveOnBoard(board: BoardModel, to: Position): (BoardModel, PegModelable)
+    + render(renderer: PegRenderer)
+}
+
+interface GameCollidable {
+    + restitutionCoefficient: Double
+    + onCollision(with: GameCollidable, deltaTime: Double): (Self, GameCollidable)
+    + onCollision(with peg: PegModelable, deltaTime: Double) -> (Self, PegModelable)
+    + onCollision(with boundary: Boundary, deltaTime: Double) -> (Self, Boundary)
+    + onCollision(with ball: Ball, deltaTime: Double) -> (Self, Ball)
+}
+
+GameEngine ..> GameState
+GameEngine --> GameBoundaryDelegate
+GameEngine *-- Ball
+GameEngine *-- PegModelable: pegs
+GameEngine *-- PegModelable: collidedPegs
+GameState *-- Ball
+GameState *-- PegModelable: pegs
+GameState *-- PegModelable: collidedPegs
+GameBoundaryDelegate --> Boundary
+GameCollidable <|.. PegModelable
+GameCollidable <|.. Boundary
+GameCollidable <|.. Ball
+@enduml

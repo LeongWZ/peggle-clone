@@ -1,0 +1,48 @@
+@startuml
+class FreeBody {
+    + static GravitationalAcceleration: Double
+    + mass: Double
+    + setPosition(position: Position): FreeBody
+    + applyForces(forces: [Force], deltaTime: Double): FreeBody
+    + onCollision(at: Position, deltaTime: Double, restitutionCoefficient: Double): FreeBody
+    - getCollisionForce(at: Position, deltaTime: Double, restitutionCoefficient: Double): Force
+}
+
+class Position {
+    + xCartesian: Double
+    + yCartesian: Double
+    + update(using: Velocity, deltaTime: Double): Position
+    + getDistance(to: Position): Double
+    + toCGPoint(): CGPoint
+}
+
+class Velocity {
+    + vx: Double
+    + vy: Double
+    + update(using: Acceleration, deltaTime: Double): Velocity
+    + magnitude: Double
+    + normalize(): Velocity
+    + scale(by: Double): Velocity
+}
+
+class Acceleration {
+    + ax: Double
+    + ay: Double
+}
+
+class Force {
+    + fx: Double
+    + fy: Double
+    + magnitude: Double
+    + scale(by: Double): Force
+    + normalize(): Force
+    + static getResultantForce(forces: [Force]): Force
+}
+
+FreeBody *-- Position
+FreeBody *-- Velocity
+FreeBody *-- Force: weight
+FreeBody ..> Force: externalForces
+Position ..> Velocity
+Velocity ..> Acceleration
+@enduml

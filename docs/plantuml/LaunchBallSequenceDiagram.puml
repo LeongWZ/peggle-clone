@@ -1,0 +1,28 @@
+@startuml
+actor Controller
+
+Controller -> GameEngine: launchBall(from: start, to: target, deltaTime: deltaTime)
+activate GameEngine
+
+opt can add ball
+  GameEngine -> Ball **: Ball(initialPosition: start)
+  activate Ball
+  Ball -> FreeBody **
+  Ball -[hidden]> Ball
+  deactivate Ball
+
+  GameEngine -> GameEngine: getLaunchBallForce(from: start, to: target)
+  
+  GameEngine -> Ball: move(externalForces: [launchBallForce], deltaTime: deltaTime)
+  activate Ball
+  Ball -> FreeBody: applyForces(externalForces + [weight])
+  Ball -[hidden]> Ball
+  deactivate Ball
+end
+
+GameEngine -> GameState **
+activate GameState
+return snapshot
+return snapshot
+
+@enduml

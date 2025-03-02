@@ -1,0 +1,23 @@
+@startuml
+actor Controller
+
+Controller -> GameEngine: refresh(deltaTime: deltaTime)
+activate GameEngine
+
+opt has ball
+    GameEngine -> GameEngine: handleMoves(deltaTime: deltaTime)
+    activate GameEngine
+
+    GameEngine -> Ball: move(externalForces: [], deltaTime: deltaTime)
+    Ball -> FreeBody: applyForces([weight])
+
+    deactivate GameEngine
+end
+
+activate GameEngine
+GameEngine -> GameState **
+activate GameState
+return snapshot
+return snapshot
+
+@enduml

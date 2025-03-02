@@ -1,0 +1,23 @@
+@startuml
+actor GameEngine
+
+GameEngine -> PegModelable: onCollision(with: Ball, deltaTime: deltaTime)
+activate PegModelable
+
+PegModelable -> Ball: onCollision(with: self, deltaTime: deltaTime)
+activate Ball
+
+opt will collide with peg
+    Ball -> Ball: onCollision(with: peg)
+    activate Ball
+    Ball -> Ball: getSafePosition(from: peg)
+    Ball -> FreeBody: onCollision(collisionPoint, deltaTime, peg.restitutionCoefficient)
+    Ball -[hidden]> Ball
+    deactivate Ball
+end
+
+return newBall
+
+return (transformedPeg, newBall)
+
+@enduml

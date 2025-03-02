@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BoardEntity" representedClassName=".BoardEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="level" maxCount="1" deletionRule="Nullify" destinationEntity="LevelEntity" inverseName="board" inverseEntity="LevelEntity"/>
+        <relationship name="normalPegs" toMany="YES" deletionRule="Cascade" destinationEntity="NormalPegEntity" inverseName="board" inverseEntity="NormalPegEntity"/>
+        <relationship name="pointPegs" toMany="YES" deletionRule="Cascade" destinationEntity="PointPegEntity" inverseName="board" inverseEntity="PointPegEntity"/>
+        <relationship name="powerUpPegs" toMany="YES" deletionRule="Cascade" destinationEntity="PowerUpPegEntity" inverseName="board" inverseEntity="PowerUpPegEntity"/>
+        <relationship name="triangularBlocks" toMany="YES" deletionRule="Cascade" destinationEntity="TriangularBlockEntity" inverseName="board" inverseEntity="TriangularBlockEntity"/>
+    </entity>
+    <entity name="LevelEntity" representedClassName=".LevelEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BoardEntity" inverseName="level" inverseEntity="BoardEntity"/>
+    </entity>
+    <entity name="NormalPegEntity" representedClassName="NormalPegEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="heading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="xCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardEntity" inverseName="normalPegs" inverseEntity="BoardEntity"/>
+    </entity>
+    <entity name="PointPegEntity" representedClassName="PointPegEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="heading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="xCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardEntity" inverseName="pointPegs" inverseEntity="BoardEntity"/>
+    </entity>
+    <entity name="PowerUpPegEntity" representedClassName="PowerUpPegEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="heading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="xCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardEntity" inverseName="powerUpPegs" inverseEntity="BoardEntity"/>
+    </entity>
+    <entity name="TriangularBlockEntity" representedClassName="TriangularBlockEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="firstXCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="firstYCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="secondXCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="secondYCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="thirdXCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="thirdYCartesian" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardEntity" inverseName="triangularBlocks" inverseEntity="BoardEntity"/>
+    </entity>
+</model>

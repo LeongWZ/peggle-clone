@@ -1,0 +1,25 @@
+@startuml
+actor Controller
+
+Controller -> GameEngine: refresh(deltaTime)
+activate GameEngine
+
+loop for all pegs
+GameEngine -> Ball: willCollide(with: peg)
+activate Ball
+Ball -> Peg
+return
+opt peg will collide with Ball
+  GameEngine -> GameEngine: mark peg as collided
+end
+end
+
+GameEngine -> GameEngine: snapshot()
+activate GameEngine
+GameEngine -> GameState **
+return snapshot
+return snapshot
+
+Controller -> PegView: observe(snapshot)
+
+@enduml

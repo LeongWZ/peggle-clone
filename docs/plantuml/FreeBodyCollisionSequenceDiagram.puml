@@ -1,0 +1,13 @@
+@startuml
+actor MovableObject
+
+MovableObject -> FreeBody: onCollision(collisionPoint, deltaTime, restitutionCoefficient)
+activate FreeBody
+
+FreeBody -> FreeBody: getCollisionForce(collisionPoint, deltaTime, restitutionCoefficient)
+
+FreeBody -> FreeBody: applyForces([collisionForce], deltaTime)
+
+return
+
+@enduml

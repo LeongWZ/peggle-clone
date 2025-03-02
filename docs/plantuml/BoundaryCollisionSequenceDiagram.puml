@@ -1,0 +1,25 @@
+@startuml
+actor GameEngine
+
+GameEngine -> GameBoundaryDelegate: getBoundary()
+activate GameBoundaryDelegate
+GameBoundaryDelegate -> Boundary **
+activate Boundary
+return boundary
+return boundary
+
+GameEngine -> Ball: onCollision(with: boundary, deltaTime: Double)
+activate Ball
+
+opt will collide with boundary
+    Ball -> Ball: onCollision(with: boundary)
+    activate Ball
+    Ball -> Ball: getSafePosition(from: boundary)
+    Ball -> FreeBody: onCollision(collisionPoint, deltaTime, boundary.restitutionCoefficient)
+    Ball -[hidden]> Ball
+    deactivate Ball
+end
+
+return newBall
+
+@enduml

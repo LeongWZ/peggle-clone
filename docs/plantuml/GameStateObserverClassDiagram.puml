@@ -1,0 +1,43 @@
+@startuml
+interface GameStateObserver {
+    + observe(gameState: GameState): Bool
+}
+
+class GameBoardViewController {
+    - gameEngine: GameEngine
+    - displayLink: CADisplayLink?
+    - lastUpdateTime: CFTimeInterval
+    + startGameLoop()
+    + gameLoop(displayLink: CADisplayLink)
+    + notifyGameStateObservers(gameState: GameState)
+}
+
+class GameState {
+    + ball: Ball?
+    + pegs: [UUID: PegModelable]
+    + collidedPegs: [UUID: PegModelable]
+}
+
+class BallView {
+    - static ImageName: String
+    + init?(coder: NSCoder)
+    + init(ball: Ball)
+    + observe(gameState: GameState): Bool
+    - isBallInPlay(gameState: GameState): Bool
+}
+
+class PegView {
+    - peg: PegModelable?
+    + observe(gameState: GameState): Bool
+    - hasCollidedWithBall(gameState: GameState): Bool
+    - isPegDeleted(gameState: GameState): Bool
+    - updatePeg(gameState: GameState)
+    - removeFromSuperviewWithAnimation()
+}
+
+GameStateObserver <|.. BallView
+GameStateObserver <|.. PegView
+GameStateObserver ..> GameState
+
+GameBoardViewController o-- GameStateObserver
+@enduml

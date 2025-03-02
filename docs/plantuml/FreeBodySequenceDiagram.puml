@@ -1,0 +1,25 @@
+@startuml
+actor User
+
+User -> FreeBody: applyForces(forces, deltaTime)
+activate FreeBody
+
+FreeBody -> Force: getResultantForce(forces)
+activate Force
+return resultantForce
+
+FreeBody -> Acceleration **: Acceleration(ax: resultantForce.fx / mass, ay: resultantForce.fy / mass)
+activate Acceleration
+return acceleration
+
+FreeBody -> Velocity: update(using: acceleration, deltaTime: deltaTime)
+activate Velocity
+return newVelocity
+
+FreeBody -> Position: update(using: newVelocity, deltaTime: deltaTime)
+activate Position
+return newPosition
+
+return
+
+@enduml

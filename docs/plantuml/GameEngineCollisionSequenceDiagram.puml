@@ -1,0 +1,20 @@
+@startuml
+actor Controller
+
+Controller -> GameEngine: refresh(deltaTime: deltaTime)
+activate GameEngine
+
+GameEngine -> GameEngine: handleCollisions(deltaTime: deltaTime)
+activate GameEngine
+
+
+loop for each movable in gameMovables
+    loop for each collidable in gameCollidables
+        GameEngine -> collidable: onCollision(with: movable, deltaTime: deltaTime)
+    end
+end
+
+deactivate GameEngine
+
+return
+@enduml
