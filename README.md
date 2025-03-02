@@ -19,6 +19,8 @@ Peggle primarily follows the Apple-style Model-View-Controller (MVC) architectur
 
 Peggle uses Storyboard and UIKit frameworks for the View and Controller layers. Core Data is used for data persistence.
 
+**This game is primarily designed to be played on iPads.**
+
 ![Main Screen Demo](docs/images/MainScreenDemo.png)
 
 ![Game Demo](docs/images/GameDemo.png)
