@@ -40,7 +40,7 @@ The models are implemented using `struct` and is immutable. To modify the model,
 
 Immutability ensures that the state of the models cannot be changed unexpectedly, which helps to prevent bugs and makes the code easier to reason about. It also allows for safer concurrent access to the models, as there is no risk of one part of the code modifying the model while another part is reading it.
 
-Some attributes (e.g. `String` or relationship objects) for the models are optional.
+Some attributes (e.g. relationship ID) for the models are optional.
 
 ### LevelQuery and LevelMutation
 The `LevelQuery` and `LevelMutation` protocols define how the persistence layer would communicate with the controller layer regarding level data. Their implementation would be left up to the implementer to decide. This allows the persistence layer to be more modular as different implementations (e.g. Core Data or SQLite) can be swapped in without affecting the rest of the application.
@@ -62,7 +62,7 @@ Most views are managed using Storyboard designer.
 ![Storyboard Layout](docs/images/StoryboardLayout.png)
 
 ### Level View
-The main view is the Level view. This is the level designer.
+This is the main view of the level designer.
 
 The main view consists of the following:
 - Container view containing the board view. This is not the board view itself.
@@ -116,10 +116,7 @@ We will then use the *delegate pattern* to designate the `LevelViewController` a
 The `BoardViewController` will not hold any state of the board model. By using the delegate pattern, we ensure that there is only a single source of truth about the level. This approach helps to achieve data consistency and synchronization across the two controllers.
 
 ## Game Engine
-The Game Engine is a crucial component of the Peggle game, responsible for managing the game state, handling ball movements, and detecting collisions. It is part of the model layer in the Model-View-Controller (MVC) architecture.
-
-### Game Engine Class Diagram
-![GameEngine Class Diagram](docs/images/GameEngineClassDiagram.png)
+The Game Engine is a crucial component of the Peggle game and is responsible for managing the game state. It is part of the model layer in the Model-View-Controller (MVC) architecture.
 
 ### Overview
 The `GameEngine` class is responsible for:
@@ -131,25 +128,19 @@ The `GameEngine` class is responsible for:
 ### Key Components
 
 #### GameEngine
-The `GameEngine` class manages the overall game state and interactions. It includes methods for launching the ball, refreshing the game state, and handling collisions.
+The `GameEngine` class manages the overall game state and interactions. It includes methods for launching the ball and refreshing the game state.
 
 #### GameState
-The `GameState` struct represents a snapshot of the game state at a particular point in time. It includes the current ball, all pegs, and collided pegs. It is **immutable**.
-
-#### GameBoundaryDelegate
-The `GameBoundaryDelegate` protocol provides boundary information for checking if balls are out of bounds.
-
-#### GameCollidable
-The GameCollidable protocol represents objects that can collide with other `GameCollidable` objects. It includes properties for the restitution coefficient and methods for handling collisions.
+The `GameState` protocol represents a snapshot of the game state at a particular point in time. It includes the current ball, all pegs, and collided pegs.
 
 #### Ball
-The `Ball` struct represents a ball in the game. It implements the `GameCollidable` protocol. It is **immutable**. It includes properties for the ball's mass, radius, and position. It has methods for moving the ball and handling collisions which return the transformed version of the ball.
+The `Ball` struct represents a ball in the game. It is **immutable**.
 
 #### Boundary
-The `Boundary` struct represents the boundary of the game area. It implements the `GameCollidable` protocol. It includes properties for the width and height of the boundary and methods for checking if the ball is out of bounds.
+The `Boundary` struct represents the boundary of the game area. It includes properties for the width and height of the boundary and methods for checking if the ball is out of bounds.
 
 #### PegModelable
-The `PegModelable` protocol represents a peg model in the game. It implements the `GameCollidable` protocol. It includes properties for the peg's ID, board ID, radius, and center.
+The `PegModelable` protocol represents a peg model in the game. It includes properties for the peg's ID, board ID, radius, and center.
 
 ## Physics Engine
 
