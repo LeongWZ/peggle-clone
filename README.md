@@ -119,16 +119,12 @@ The `BoardViewController` will not hold any state of the board model. By using t
 The Game Engine is a crucial component of the Peggle game and is responsible for managing the game state. It is part of the model layer in the Model-View-Controller (MVC) architecture.
 
 ### Overview
-The `GameEngine` class is responsible for:
-- Managing the game state, including the ball and pegs.
-- Launching the ball and calculating the launch force.
-- Refreshing the game state by updating ball movements and handling collisions.
-- Interacting with the game boundary to check if the ball is out of bounds.
+The `GameEngine` class is responsible for managing the game state.
 
 ### Key Components
 
 #### GameEngine
-The `GameEngine` class manages the overall game state and interactions. It includes methods for launching the ball and refreshing the game state.
+The `GameEngine` class manages the overall game state and interactions. It includes methods for refreshing the game state and providing a snapshot of the current game state.
 
 #### GameState
 The `GameState` protocol represents a snapshot of the game state at a particular point in time. It includes the current ball, all pegs, and collided pegs.
