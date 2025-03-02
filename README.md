@@ -8,11 +8,6 @@
 - [Controller Layer](#controller-layer)
 - [Game Engine](#game-engine)
 - [Physics Engine](#physics-engine)
-- [Ball Launch](#ball-launch)
-- [Ball Movement](#ball-movement)
-- [Ball Collision](#ball-collision)
-- [Peg Lighting](#peg-lighting)
-- [Peg Removal](#peg-removal)
 
 ## Introduction
 Peggle primarily follows the Apple-style Model-View-Controller (MVC) architecture. The Controller layer assumes the responsibility of the middleman between the Model and View layers.
