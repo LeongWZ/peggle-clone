@@ -20,6 +20,50 @@ Peggle uses Storyboard and UIKit frameworks for the View and Controller layers. 
 
 ![Game Demo](docs/images/GameDemo.png)
 
+## Rules of the Game
+1. Player can shoot up to 10 balls using only the cannon throughout the entire game
+2. At any given point in time, either 0 or 1 ball is present in the game
+
+### Cannon Direction=
+- To aim the cannon, drag your finger (without releasing it) from the cannon to the desired target.
+- To shoot the ball, simply release your finger after dragging towards the desired target
+- Once dragged, you cannot cancel the action of shooting the ball. So think twice before aiming the cannon.
+
+### Win and Lose Conditions
+- **Win**: Clear all orange pegs on the board before player runs out of balls to shoot
+- **Lose**: There are leftover orange pegs and player ran out of balls
+
+## Level Designer Features
+
+### Peg Rotation
+
+![On Drag Toggle](docs/images/OnDragToggle.png)
+
+1. On the bottom right corner of the Level Designer, toggle on `Rotate` in the `On Drag` control switch.
+   - From this point onwards, you **cannot move** any pegs.
+   - To move pegs, simply toggle back on `Move` in the `On Drag` control switch
+2. To rotate the triangular peg, simply drag 1 finger from the peg to any point outside the peg. Release your finger once you have attained the desired orientation.
+   - **Warning**: Peg will be resized when you are dragging any of the corners of the triangular peg
+   - **Tip**: To avoid resizing the peg, simply drag from the flat side of the triangular peg
+
+### Peg Resizing
+
+#### Circular Pegs
+1. To increase peg size, use 2 fingers to pinch the peg outwards
+2. To decrease peg size, use 2 fingers to pinch the peg inwards
+
+#### Triangular Pegs
+1. Use 1 finger to drag any corner of the triangular peg
+2. Stop dragging when the corner has reach its desired position
+3. Repeat Step 1 and 2 for the rest of the corners if needed
+
+## Other features
+1. Dark Mode toggle on Main Menu
+- In addition to having the dark mode toggle in the game, player can conveniently toggle on/off dark mode on the main menu
+2. Ka-Boom Explosion animation
+![Ka-Boom Explosion Demo](docs/images/KaBoomExplosionDemo.png)
+- When Ka-Boom power up is activated, green pegs will explode on collision with ball
+
 ## Design Layout
 ![Architecture Diagram](docs/images/ArchitectureDiagram.svg)
 
