@@ -18,13 +18,11 @@ Peggle uses Storyboard and UIKit frameworks for the View and Controller layers. 
 
 ![Main Screen Demo](docs/images/MainScreenDemo.png)
 
-![Game Demo](docs/images/GameDemo.png)
-
 ## Rules of the Game
 1. Player can shoot up to 10 balls using only the cannon throughout the entire game
 2. At any given point in time, either 0 or 1 ball is present in the game
 
-### Cannon Direction=
+### Cannon Direction
 - To aim the cannon, drag your finger (without releasing it) from the cannon to the desired target.
 - To shoot the ball, simply release your finger after dragging towards the desired target
 - Once dragged, you cannot cancel the action of shooting the ball. So think twice before aiming the cannon.
@@ -32,6 +30,8 @@ Peggle uses Storyboard and UIKit frameworks for the View and Controller layers. 
 ### Win and Lose Conditions
 - **Win**: Clear all orange pegs on the board before player runs out of balls to shoot
 - **Lose**: There are leftover orange pegs and player ran out of balls
+
+![Game Demo](docs/images/GameDemo.png)
 
 ## Level Designer Features
 
